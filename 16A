@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main()
+{
+    int bucketSize, outputRate, n;
+    int bucket = 0, packet;
+
+    printf("Enter bucket size: ");
+    scanf("%d", &bucketSize);
+
+    printf("Enter output rate: ");
+    scanf("%d", &outputRate);
+
+    printf("Enter number of packets: ");
+    scanf("%d", &n);
+
+    for (int i = 1; i <= n; i++)
+    {
+        printf("Enter packet size: ");
+        scanf("%d", &packet);
+
+        if (packet <= bucketSize - bucket)
+        {
+            bucket = bucket + packet;
+            printf("Packet accepted\n");
+        }
+        else
+        {
+            printf("Packet dropped\n");
+        }
+
+        if (bucket >= outputRate)
+        {
+            bucket = bucket - outputRate;
+            printf("Packets sent: %d\n", outputRate);
+        }
+        else
+        {
+            printf("Packets sent: %d\n", bucket);
+            bucket = 0;
+        }
+
+        printf("Remaining in bucket: %d\n", bucket);
+    }
+
+    return 0;
+}
